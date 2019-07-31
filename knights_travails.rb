@@ -1,10 +1,9 @@
 class Cell
-  attr_accessor :x, :y, :distance, :previous_move
+  attr_accessor :x, :y, :previous_move
 
-  def initialize(x,y, distance)
+  def initialize(x,y)
     @x = x
     @y = y
-    @distance = distance
     @moves = Array.new
   end
 
@@ -18,14 +17,13 @@ def knight_moves(position, target)
   dy = [1, -1, 1, -1, 2, -2, 2, -2] 
   
   que = Array.new
-  que << Cell.new(position[0], position[1], 0)
+  que << Cell.new(position[0], position[1])
 
   is_visited = create_visited
   is_visited[que[0].position] = true
 
   while que.length > 0
     current_knight = que.shift
-    distance += 1
 
     if current_knight.position == target
       display_moves = all_previous_moves(current_knight)
@@ -36,7 +34,7 @@ def knight_moves(position, target)
       next_move = [dx[i] + current_knight.x , dy[i] + current_knight.y]
       if is_visited[next_move] == false && in_border(next_move)
         is_visited[next_move] = true
-        new_knight = Cell.new(next_move[0], next_move[1], distance)
+        new_knight = Cell.new(next_move[0], next_move[1])
         new_knight.previous_move = current_knight
         que << new_knight
       end
