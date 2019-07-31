@@ -70,4 +70,3 @@ def create_visited
 	end
 	visited
 end
-#
